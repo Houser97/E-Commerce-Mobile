@@ -15,6 +15,12 @@ build
 *.userosscache
 *.sln.docstates
 
+# Ignore images
+*.jpg
+*.jpeg
+*.png
+*.gif
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
