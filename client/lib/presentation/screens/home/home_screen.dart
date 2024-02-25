@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_version/presentation/screens/cart/cart_screen.dart';
-import 'package:flutter_version/pages/product_list.dart';
+import 'package:flutter_version/presentation/widgets/home/product_list.dart';
 import 'package:flutter_version/presentation/widgets/shared/categories.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
-import 'package:flutter_version/presentation/widgets/hero_card.dart';
-import 'package:flutter_version/widgets/product_card.dart';
+import 'package:flutter_version/presentation/widgets/home/hero_card.dart';
+import 'package:flutter_version/presentation/widgets/home/product_card.dart';
 import 'package:flutter_version/presentation/widgets/shared/search.dart';
 
 class HomePage extends StatefulWidget {
