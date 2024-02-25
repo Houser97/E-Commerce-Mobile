@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_version/presentation/widgets/shared/categories.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
 import 'package:flutter_version/presentation/widgets/home/hero_card.dart';
-import 'package:flutter_version/presentation/widgets/cart/product_card.dart';
+import 'package:flutter_version/presentation/widgets/home/product_card.dart';
 import 'package:flutter_version/presentation/widgets/shared/search.dart';
 
 class ProductList extends StatefulWidget {
