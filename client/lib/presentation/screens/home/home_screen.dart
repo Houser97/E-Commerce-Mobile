@@ -3,8 +3,8 @@ import 'package:flutter_version/presentation/screens/cart/cart_screen.dart';
 import 'package:flutter_version/presentation/widgets/home/product_list.dart';
 import 'package:flutter_version/presentation/widgets/shared/categories.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
-import 'package:flutter_version/presentation/widgets/home/hero_card.dart';
-import 'package:flutter_version/presentation/widgets/home/product_card.dart';
+import 'package:flutter_version/presentation/widgets/home/home_hero_card.dart';
+import 'package:flutter_version/presentation/widgets/home/home_product_card.dart';
 import 'package:flutter_version/presentation/widgets/shared/search.dart';
 
 class HomePage extends StatefulWidget {
@@ -119,33 +119,17 @@ class _ProductListState extends State<ProductList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Discover',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Search(
-              updateSearchFilter: updateSearchFilter,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
+            const Text('Discover',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Search(updateSearchFilter: updateSearchFilter),
+            const SizedBox(height: 30),
             const HeroCard(),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Categories(
-              updateProducts: updateCategoryFilter,
-              selectedCategory: categoryFilter,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+                updateProducts: updateCategoryFilter,
+                selectedCategory: categoryFilter),
+            const SizedBox(height: 10),
             GridView.builder(
                 shrinkWrap:
                     true, // Le permite ocupar solo el espacio que necesita.
