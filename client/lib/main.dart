@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_version/config/theme/app_theme.dart';
-import 'package:flutter_version/pages/home.dart';
-import 'package:flutter_version/provider/cart_provider.dart';
+import 'package:flutter_version/presentation/screens/screens.dart';
+import 'package:flutter_version/presentation/providers/cart/cart_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {

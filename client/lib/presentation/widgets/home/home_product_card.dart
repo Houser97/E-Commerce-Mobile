@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_version/presentation/screens/products/product_details_screen.dart';
+import 'package:flutter_version/presentation/screens/screens.dart';
 
 class ProductCard extends StatelessWidget {
   final Map<String, dynamic> product;

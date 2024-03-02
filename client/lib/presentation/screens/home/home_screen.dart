@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_version/presentation/screens/cart/cart_screen.dart';
-import 'package:flutter_version/presentation/widgets/shared/categories.dart';
+import 'package:flutter_version/presentation/screens/screens.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
-import 'package:flutter_version/presentation/widgets/home/home_hero_card.dart';
-import 'package:flutter_version/presentation/widgets/home/home_product_card.dart';
-import 'package:flutter_version/presentation/widgets/shared/search.dart';
+import 'package:flutter_version/presentation/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

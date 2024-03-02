@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_version/presentation/providers/cart_provider.dart';
-import 'package:flutter_version/presentation/widgets/shared/custom_button.dart';
+import 'package:flutter_version/presentation/providers/cart/cart_provider.dart';
+import 'package:flutter_version/presentation/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class QuantityButtons extends StatelessWidget {
