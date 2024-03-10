@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_version/config/theme/app_theme.dart';
 import 'package:flutter_version/presentation/screens/screens.dart';
 import 'package:flutter_version/presentation/providers/cart/cart_provider.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
