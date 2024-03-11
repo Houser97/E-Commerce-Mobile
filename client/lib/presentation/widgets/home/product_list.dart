@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_version/presentation/providers/products/products_providers.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
 import 'package:flutter_version/presentation/widgets/widgets.dart';
 
-class ProductList extends StatefulWidget {
+class ProductList extends ConsumerStatefulWidget {
   const ProductList({super.key});
 
   @override
-  State<ProductList> createState() => _ProductListState();
+  ProductListState createState() => ProductListState();
 }
 
-class _ProductListState extends State<ProductList> {
+class ProductListState extends ConsumerState<ProductList> {
   List<Map<String, dynamic>> filteredProducts = products;
   String categoryFilter = 'All';
   String searchFilter = '';
@@ -30,72 +32,46 @@ class _ProductListState extends State<ProductList> {
 
   void updateProducts() {
     if (categoryFilter == 'All') {
-      filteredProducts = products
-          .where((product) => (product['title'] as String)
-              .toLowerCase()
-              .contains(searchFilter.toLowerCase()))
-          .toList();
+      filteredProducts =
+          products.where((product) => (product['title'] as String).toLowerCase().contains(searchFilter.toLowerCase())).toList();
     } else {
       filteredProducts = products
           .where((product) =>
-              (product['categories'] as List<String>)
-                  .contains(categoryFilter) &&
-              (product['title'] as String)
-                  .toLowerCase()
-                  .contains(searchFilter.toLowerCase()))
+              (product['categories'] as List<String>).contains(categoryFilter) &&
+              (product['title'] as String).toLowerCase().contains(searchFilter.toLowerCase()))
           .toList();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final products = ref.watch(allProductsProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Discover',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Search(
-              updateSearchFilter: updateSearchFilter,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
+            const Text('Discover', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Search(updateSearchFilter: updateSearchFilter),
+            const SizedBox(height: 30),
             const HeroCard(),
-            const SizedBox(
-              height: 10,
-            ),
-            Categories(
-              updateProducts: updateCategoryFilter,
-              selectedCategory: categoryFilter,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
+            Categories(updateProducts: updateCategoryFilter, selectedCategory: categoryFilter),
+            const SizedBox(height: 10),
             GridView.builder(
-                shrinkWrap:
-                    true, // Le permite ocupar solo el espacio que necesita.
+                shrinkWrap: true, // Le permite ocupar solo el espacio que necesita.
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: filteredProducts.length,
+                itemCount: products.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 2,
                   crossAxisSpacing: 15,
-                  childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height / 1.3),
+                  childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 1.3),
                 ),
                 itemBuilder: (context, index) {
-                  final product = filteredProducts[index];
+                  final product = products[index];
                   return ProductCard(product: product);
                 })
           ],
