@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_version/domain/entities/product.dart';
 import 'package:flutter_version/presentation/screens/screens.dart';
 
 class ProductCard extends StatelessWidget {
-  final Map<String, dynamic> product;
+  final Product product;
   const ProductCard({
     super.key,
     required this.product,
@@ -10,10 +11,10 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String title = product['title'];
-    final double price = product['price'];
-    final double rating = product['rating'];
-    final String image = product['image'];
+    final String title = product.title;
+    final double price = product.price;
+    final double rating = product.rating;
+    final String image = product.image;
     return SizedBox(
       width: 140,
       child: Column(
