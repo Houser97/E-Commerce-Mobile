@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_version/presentation/providers/products/products_providers.dart';
-import 'package:flutter_version/shared/data/local_products.dart';
+import 'package:flutter_version/presentation/providers/providers.dart';
 import 'package:flutter_version/presentation/widgets/widgets.dart';
 
 class ProductList extends ConsumerStatefulWidget {
@@ -12,40 +11,31 @@ class ProductList extends ConsumerStatefulWidget {
 }
 
 class ProductListState extends ConsumerState<ProductList> {
-  List<Map<String, dynamic>> filteredProducts = products;
   String categoryFilter = 'All';
   String searchFilter = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Ver implementación de este provider para revisar problema de widget tree building.
+    ref.read(productsByCategoryProvider.notifier).searchProductByCategory('All');
+  }
 
   void updateSearchFilter(String filter) {
     setState(() {
       searchFilter = filter;
-      updateProducts();
     });
   }
 
   void updateCategoryFilter(String filter) {
     setState(() {
       categoryFilter = filter;
-      updateProducts();
     });
-  }
-
-  void updateProducts() {
-    if (categoryFilter == 'All') {
-      filteredProducts =
-          products.where((product) => (product['title'] as String).toLowerCase().contains(searchFilter.toLowerCase())).toList();
-    } else {
-      filteredProducts = products
-          .where((product) =>
-              (product['categories'] as List<String>).contains(categoryFilter) &&
-              (product['title'] as String).toLowerCase().contains(searchFilter.toLowerCase()))
-          .toList();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final products = ref.watch(allProductsProvider);
+    final products = ref.watch(productsByCategoryProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: SingleChildScrollView(
