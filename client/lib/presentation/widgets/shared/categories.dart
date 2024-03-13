@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_version/presentation/providers/products/products_providers.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
 
 class Categories extends StatelessWidget {
   final void Function(String) updateProducts;
   final String selectedCategory;
-  const Categories(
-      {super.key,
-      required this.updateProducts,
-      required this.selectedCategory});
+  const Categories({super.key, required this.updateProducts, required this.selectedCategory});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +27,7 @@ class Categories extends StatelessWidget {
               itemCount: categories.length,
               itemBuilder: (context, index) {
                 final category = categories[index];
-                return _Categorie(
-                    updateProducts: updateProducts,
-                    category: category,
-                    selectedCategory: selectedCategory);
+                return _Categorie(updateProducts: updateProducts, category: category, selectedCategory: selectedCategory);
               }),
         )
       ],
@@ -39,7 +35,7 @@ class Categories extends StatelessWidget {
   }
 }
 
-class _Categorie extends StatelessWidget {
+class _Categorie extends ConsumerWidget {
   const _Categorie({
     required this.updateProducts,
     required this.category,
@@ -51,9 +47,10 @@ class _Categorie extends StatelessWidget {
   final String selectedCategory;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
+        ref.read(productsByCategoryProvider.notifier).searchProductByCategory(category);
         updateProducts(category);
       },
       child: Padding(
@@ -61,18 +58,12 @@ class _Categorie extends StatelessWidget {
         child: Chip(
           label: Text(
             category,
-            style: TextStyle(
-                color:
-                    selectedCategory == category ? Colors.white : Colors.black),
+            style: TextStyle(color: selectedCategory == category ? Colors.white : Colors.black),
           ),
-          backgroundColor: selectedCategory == category
-              ? Theme.of(context).colorScheme.primary
-              : Colors.transparent,
+          backgroundColor: selectedCategory == category ? Theme.of(context).colorScheme.primary : Colors.transparent,
           side: BorderSide(
             width: 1.5,
-            color: selectedCategory == category
-                ? Theme.of(context).colorScheme.primary
-                : Colors.black,
+            color: selectedCategory == category ? Theme.of(context).colorScheme.primary : Colors.black,
           ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
