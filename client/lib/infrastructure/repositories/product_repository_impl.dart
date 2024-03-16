@@ -7,6 +7,11 @@ class ProductRepositoryImpl extends LocalProductRepository {
   ProductRepositoryImpl({required this.datasource});
   @override
   List<Product> getAllLocalProducts() {
-    return datasource.getAllLocalProducts();
+    return datasource.getAllProducts();
+  }
+
+  @override
+  List<Product> getProductsByCategory(String category) {
+    return datasource.getProductsByCategory(category);
   }
 }

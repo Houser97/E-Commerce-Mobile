@@ -5,10 +5,20 @@ import 'package:flutter_version/infrastructure/models/local/local_product.dart';
 import 'package:flutter_version/shared/data/local_products.dart';
 
 class LocalProductDatasource extends ProductDatasource {
-  @override
-  List<Product> getAllLocalProducts() {
+  List<Product> _jsonToProducts(json) {
     final List<LocalProduct> localProducts = products.map((product) => LocalProduct.fromJson(product)).toList();
 
     return localProducts.map((localProduct) => ProductMapper.productLocalToEntity(localProduct)).toList();
+  }
+
+  @override
+  List<Product> getAllProducts() {
+    return _jsonToProducts(products);
+  }
+
+  @override
+  List<Product> getProductsByCategory(String category) {
+    if (category == 'All') return getAllProducts();
+    return _jsonToProducts(products).where((product) => product.categories.contains(category)).toList();
   }
 }
