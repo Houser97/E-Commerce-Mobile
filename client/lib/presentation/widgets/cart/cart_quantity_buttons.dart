@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_version/presentation/providers/cart/cart_provider.dart';
 import 'package:flutter_version/presentation/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
 class QuantityButtons extends StatelessWidget {
   final int currentQty;
@@ -14,15 +12,9 @@ class QuantityButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void decreaseProduct() {
-      Provider.of<CartProvider>(context, listen: false)
-          .decreaseProductQuantity(productId);
-    }
+    void decreaseProduct() {}
 
-    void increaseProduct() {
-      Provider.of<CartProvider>(context, listen: false)
-          .increaseProductQuantity(productId);
-    }
+    void increaseProduct() {}
 
     const double buttonsSize = 32;
     return Row(

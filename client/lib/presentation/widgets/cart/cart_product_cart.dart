@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_version/presentation/widgets/widgets.dart';
-import 'package:flutter_version/presentation/providers/cart/cart_provider.dart';
-import 'package:provider/provider.dart';
 
 class ProductCart extends StatelessWidget {
   final String image;
@@ -68,8 +66,7 @@ class ProductCart extends StatelessWidget {
                       ),
                       RawMaterialButton(
                         onPressed: () {
-                          Provider.of<CartProvider>(context, listen: false)
-                              .removeProductById(id);
+                          // Eliminar producto del carrito
                         },
                         constraints: const BoxConstraints.expand(
                           width: 30,
