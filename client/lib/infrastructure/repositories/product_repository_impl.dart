@@ -6,12 +6,12 @@ class ProductRepositoryImpl extends LocalProductRepository {
   final ProductDatasource datasource;
   ProductRepositoryImpl({required this.datasource});
   @override
-  List<Product> getAllLocalProducts() {
-    return datasource.getAllProducts();
+  Future<List<Product>> getAllLocalProducts({int page = 1, int limit = 20}) {
+    return datasource.getAllProducts(limit: limit);
   }
 
   @override
-  List<Product> getProductsByCategory(String category) {
-    return datasource.getProductsByCategory(category);
+  Future<List<Product>> getProductsByCategory(String category, {int page = 1, int limit = 20}) {
+    return datasource.getProductsByCategory(category, limit: limit);
   }
 }
