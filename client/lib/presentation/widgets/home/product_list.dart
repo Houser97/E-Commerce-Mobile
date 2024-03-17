@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_version/domain/entities/product.dart';
 import 'package:flutter_version/presentation/providers/providers.dart';
 import 'package:flutter_version/presentation/widgets/widgets.dart';
 
@@ -62,24 +63,39 @@ class ProductListState extends ConsumerState<ProductList> {
             const SizedBox(height: 10),
             Categories(updateProducts: updateCategoryFilter, selectedCategory: categoryFilter),
             const SizedBox(height: 10),
-            GridView.builder(
-                shrinkWrap: true, // Le permite ocupar solo el espacio que necesita.
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 2,
-                  crossAxisSpacing: 15,
-                  height: 200,
-                ),
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return ProductCard(product: product);
-                })
+            _ProductsGrid(products: products)
           ],
         ),
       ),
     );
+  }
+}
+
+class _ProductsGrid extends StatelessWidget {
+  const _ProductsGrid({
+    required this.products,
+  });
+
+  final List<Product> products;
+
+  final gridDelegate = const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+    crossAxisCount: 2,
+    mainAxisSpacing: 2,
+    crossAxisSpacing: 15,
+    height: 200,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        shrinkWrap: true, // Le permite ocupar solo el espacio que necesita.
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: products.length,
+        gridDelegate: gridDelegate,
+        itemBuilder: (context, index) {
+          final product = products[index];
+          return ProductCard(product: product);
+        });
   }
 }
 
