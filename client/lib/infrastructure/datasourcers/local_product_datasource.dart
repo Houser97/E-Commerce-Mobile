@@ -10,15 +10,8 @@ class LocalProductDatasource extends ProductDatasource {
   }
 
   @override
-  Future<List<Product>> getAllProducts({int page = 1, int limit = 20}) async {
+  Future<List<Product>> getProducts(String category, String? query, {int page = 1, int limit = 20}) async {
     await Future.delayed(const Duration(milliseconds: 200));
     return _jsonToProducts(products);
-  }
-
-  @override
-  Future<List<Product>> getProductsByCategory(String category, {int page = 1, int limit = 20}) async {
-    if (category == 'All') return getAllProducts();
-    await Future.delayed(const Duration(milliseconds: 200));
-    return _jsonToProducts(products).where((product) => product.categories.contains(category)).toList();
   }
 }

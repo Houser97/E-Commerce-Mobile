@@ -14,14 +14,8 @@ class DummyProductDatasource extends ProductDatasource {
   }
 
   @override
-  Future<List<Product>> getAllProducts({int page = 1, int limit = 20}) async {
+  Future<List<Product>> getProducts(String category, String? query, {int page = 1, int limit = 20}) async {
     final response = await dio.get('/', queryParameters: {'limit': 80});
     return _jsonToProduct(response.data);
-  }
-
-  @override
-  Future<List<Product>> getProductsByCategory(String category, {int page = 1, int limit = 20}) {
-    // TODO: implement getProductsByCategory
-    throw UnimplementedError();
   }
 }
