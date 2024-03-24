@@ -20,7 +20,8 @@ class ProductListState extends ConsumerState<ProductList> {
   void initState() {
     super.initState();
     // Ver implementación de este provider para revisar problema de widget tree building.
-    ref.read(productsByCategoryProvider.notifier).searchProductByCategory('All');
+    //ref.read(productsByCategoryProvider.notifier).searchProductByCategory('All');
+    ref.read(productsProvider.notifier).getProducts(category: 'All');
   }
 
   void updateSearchFilter(String filter) {
@@ -37,17 +38,16 @@ class ProductListState extends ConsumerState<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-    final hasProducts = ref.watch(productsByCategoryProvider).isNotEmpty;
+    //final hasProducts = ref.watch(productsByCategoryProvider).isNotEmpty;
+    final products = ref.watch(productsProvider);
 
-    if (!hasProducts) {
+    if (products.isEmpty) {
       return const Center(
         child: CircularProgressIndicator(
           strokeWidth: 2,
         ),
       );
     }
-
-    final products = ref.watch(productsByCategoryProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
