@@ -13,7 +13,7 @@ class ProductsNotifier extends StateNotifier<List<Product>> {
   final GetProductsCallback fetchMoreProducts;
   ProductsNotifier({required this.fetchMoreProducts}) : super([]);
 
-  Future<List<Product>> getProducts(String category, String? query) async {
+  Future<List<Product>> getProducts({required String category, String? query}) async {
     final products = await fetchMoreProducts(category, query);
     // Esperar a que el árbol de Widgets se renderice antes de modificar este estado.
     await Future.delayed(const Duration(milliseconds: 400));
