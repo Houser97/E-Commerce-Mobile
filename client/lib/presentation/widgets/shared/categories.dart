@@ -50,7 +50,7 @@ class _Categorie extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(productsByCategoryProvider.notifier).searchProductByCategory(category);
+        ref.read(productsProvider.notifier).getProducts(category: category);
         updateProducts(category);
       },
       child: Padding(
