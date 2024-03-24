@@ -27,7 +27,7 @@ class Categories extends StatelessWidget {
               itemCount: categories.length,
               itemBuilder: (context, index) {
                 final category = categories[index];
-                return _Categorie(updateProducts: updateProducts, category: category, selectedCategory: selectedCategory);
+                return _Category(updateProducts: updateProducts, category: category, selectedCategory: selectedCategory);
               }),
         )
       ],
@@ -35,8 +35,8 @@ class Categories extends StatelessWidget {
   }
 }
 
-class _Categorie extends ConsumerWidget {
-  const _Categorie({
+class _Category extends ConsumerWidget {
+  const _Category({
     required this.updateProducts,
     required this.category,
     required this.selectedCategory,
