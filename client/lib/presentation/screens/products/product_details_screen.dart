@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_version/presentation/providers/cart_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_version/domain/entities/product.dart';
 
 class ProductDetails extends StatelessWidget {
-  final Map<String, dynamic> product;
+  final Product product;
   const ProductDetails({
     super.key,
     required this.product,
@@ -11,26 +10,16 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String title = product['title'];
-    final double price = product['price'];
-    final double rating = product['rating'];
-    final String image = product['image'];
-    final int id = product['id'];
+    final String title = product.title;
+    final double price = product.price;
+    final double rating = product.rating;
+    final String image = product.image;
+    final String id = product.id;
 
-    void addProduct() {
-      Provider.of<CartProvider>(context, listen: false).addProduct({
-        'id': id,
-        'title': title,
-        'price': price,
-        'image': image,
-        'rating': rating,
-        'quantity': 1
-      });
-    }
+    void addProduct() {}
 
     void productMessage(String message) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
     }
 
     const space = SizedBox(
@@ -45,7 +34,7 @@ class ProductDetails extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: Image.asset(
+                child: Image.network(
                   image,
                 ),
               ),
@@ -81,8 +70,7 @@ class ProductDetails extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(width: 1, color: Colors.grey),
@@ -129,8 +117,7 @@ class ProductDetails extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           vertical: 25,
                         ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                       ),
                       child: const Text(
                         'Add to Cart',
