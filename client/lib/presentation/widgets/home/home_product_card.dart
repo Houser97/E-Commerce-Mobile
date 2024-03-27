@@ -15,8 +15,11 @@ class ProductCard extends StatelessWidget {
     final double price = product.price;
     final double rating = product.rating;
     final String image = product.image;
+
+    final size = MediaQuery.of(context).size;
+
     return SizedBox(
-      width: 140,
+      width: size.width * 0.4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,10 +33,8 @@ class ProductCard extends StatelessWidget {
             },
             child: Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                  color: Color.fromRGBO(240, 242, 241, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
-              child: Image.asset(
+              decoration: const BoxDecoration(color: Color.fromRGBO(240, 242, 241, 1), borderRadius: BorderRadius.all(Radius.circular(16))),
+              child: Image.network(
                 image,
                 height: 150,
               ),
