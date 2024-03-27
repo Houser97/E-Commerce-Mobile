@@ -3,7 +3,7 @@ import 'package:flutter_version/presentation/widgets/widgets.dart';
 
 class ProductCart extends StatelessWidget {
   final String image;
-  final int id;
+  final String id;
   final String title;
   final double price;
   final int currentQty;
@@ -35,7 +35,7 @@ class ProductCart extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.asset(
+            child: Image.network(
               image,
               height: 90,
             ),
