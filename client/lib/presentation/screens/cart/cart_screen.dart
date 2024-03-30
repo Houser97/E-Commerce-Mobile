@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_version/presentation/providers/cart/cart_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_version/presentation/providers/cart/cart_providers.dart';
 import 'package:flutter_version/presentation/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
-class Cart extends StatelessWidget {
+class Cart extends ConsumerWidget {
   const Cart({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final cart = context.watch<CartProvider>().cart;
-    final List<int> cartKeys = cart.keys.toList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cart = ref.watch(cartProvider).values.toList();
 
-    double totalPrice = 0;
-
-    for (final product in cart.values) {
-      double price = product['price'];
-      int quantity = product['quantity'];
-
-      totalPrice += price * quantity;
+    if (cart.isEmpty) {
+      return const Center(
+        child: Text('Cart empty'),
+      );
     }
+
+    // for (final product in cart.values) {
+    //   double price = product['price'];
+    //   int quantity = product['quantity'];
+
+    //   totalPrice += price * quantity;
+    // }
 
     return Padding(
         padding: const EdgeInsets.all(10.0),
@@ -27,20 +30,20 @@ class Cart extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                  itemCount: cartKeys.length,
+                  itemCount: cart.length,
                   itemBuilder: (context, index) {
-                    final product = cart[cartKeys[index]]!;
-                    final id = product['id'];
-                    final title = product['title'];
-                    final price = product['price'];
-                    final image = product['image'];
-                    final currentQty = product['quantity'];
+                    final product = cart[index];
+                    final id = product.id;
+                    final title = product.title;
+                    final price = product.price;
+                    final image = product.image;
+                    final currentQty = product.quantity;
                     return ProductCart(
-                      id: id as int,
-                      image: image as String,
-                      title: title as String,
-                      price: price as double,
-                      currentQty: currentQty,
+                      id: id,
+                      image: image,
+                      title: title,
+                      price: price,
+                      currentQty: currentQty!,
                     );
                   }),
             ),
@@ -48,7 +51,7 @@ class Cart extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Total: \$$totalPrice',
+              'Total:0',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
@@ -61,15 +64,14 @@ class Cart extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Provider.of<CartProvider>(context, listen: false).checkout();
+                  // checkout
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   padding: const EdgeInsets.symmetric(
                     vertical: 25,
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 ),
                 child: const Text(
                   'Checkout',
