@@ -3,7 +3,7 @@ import 'package:flutter_version/presentation/widgets/widgets.dart';
 
 class QuantityButtons extends StatelessWidget {
   final int currentQty;
-  final int productId;
+  final String productId;
   const QuantityButtons({
     super.key,
     required this.currentQty,
