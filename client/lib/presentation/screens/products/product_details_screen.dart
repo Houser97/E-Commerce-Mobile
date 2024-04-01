@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_version/domain/entities/product.dart';
+import 'package:flutter_version/presentation/providers/cart/cart_providers.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends ConsumerWidget {
   final Product product;
   const ProductDetails({
     super.key,
@@ -9,14 +11,15 @@ class ProductDetails extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final String title = product.title;
     final double price = product.price;
     final double rating = product.rating;
     final String image = product.image;
-    final String id = product.id;
 
-    void addProduct() {}
+    void addProduct(Product product) {
+      ref.read(cartProvider.notifier).addProduct(product);
+    }
 
     void productMessage(String message) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
@@ -109,7 +112,7 @@ class ProductDetails extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        addProduct();
+                        addProduct(product);
                         productMessage("Product added.");
                       },
                       style: ElevatedButton.styleFrom(
