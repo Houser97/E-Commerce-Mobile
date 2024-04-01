@@ -3,7 +3,7 @@ import 'package:flutter_version/infrastructure/models/dummy/dummy_product.dart';
 
 class DummyProductMapper {
   static Product dummyProductToEntity(DummyProduct dummyProduct) => Product(
-        id: dummyProduct.id,
+        id: dummyProduct.id.toString(),
         title: dummyProduct.title,
         price: dummyProduct.price.toDouble(),
         image: dummyProduct.thumbnail,
