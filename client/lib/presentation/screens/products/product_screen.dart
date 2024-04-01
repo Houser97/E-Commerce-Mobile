@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_version/domain/entities/product.dart';
 import 'package:flutter_version/presentation/providers/cart/cart_providers.dart';
 
-class ProductDetails extends ConsumerWidget {
+class ProductScreen extends ConsumerWidget {
   final Product product;
-  const ProductDetails({
+  const ProductScreen({
     super.key,
     required this.product,
   });
