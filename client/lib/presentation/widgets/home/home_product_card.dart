@@ -26,7 +26,7 @@ class ProductCard extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return ProductDetails(
+                return ProductScreen(
                   product: product,
                 );
               }));
