@@ -308,4 +308,4 @@ builder.Services.AddSingleton<ReviewsService>();
 - Implementar JWT.
 - Testear login con JWT.
 - Crear ventana de LOGIN en Flutter.
-- Implementar conexión a server con Flutter.
+- Implementar conexión a server con Flutter
